@@ -7,6 +7,8 @@ import java.util.Locale;
 import java.util.Scanner;
 
 /**
+ * 
+ * 
  * The Instance class allows to create an object that contains the data stored
  * in a tsp file. <br>
  * <br>
