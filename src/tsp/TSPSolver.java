@@ -94,6 +94,7 @@ public class TSPSolver {
 	}
 	
 	public void solve() throws Exception{
+		
 		int n = m_instance.getNbCities();
 		Solution S = new Solution(m_instance);
 		long[][] A = m_instance.getDistances();
