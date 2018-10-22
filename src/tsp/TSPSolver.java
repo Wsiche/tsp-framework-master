@@ -94,7 +94,7 @@ public class TSPSolver {
 	}
 	
 	public void solve() throws Exception{
-		
+		/*
 		int n = m_instance.getNbCities();
 		Solution S = new Solution(m_instance);
 		long[][] A = m_instance.getDistances();
@@ -127,6 +127,41 @@ public class TSPSolver {
 			
 		}
 		S.setObjectiveValue(DistanceFinale);
+		*/
+		int n = m_instance.getNbCities();
+		Solution Sol = new Solution(m_instance);
+		long[][] m_distances = m_instance.getDistances();
+		ArrayList<Integer> v_visités = new ArrayList<Integer>(); //villes visités
+		ArrayList<Integer> v_avisiter = new ArrayList<Integer>(); //villes a visiter
+		int villeactuelle=0;
+		v_visités.add(villeactuelle);
+		int k=0;
+		Sol.setCityPosition(villeactuelle, k);
+		Sol.setCityPosition(villeactuelle, n);
+		for (int i = 1; i < n; i++) {
+			v_avisiter.add(i);
+		}
+		
+		
+		while (v_avisiter.size()>0) {
+			int ville=v_avisiter.get(0); // recherche de la nouvelle ville a visiter
+			long distance=m_distances[villeactuelle][v_avisiter.get(0)];
+			for ( int u : v_avisiter) {//recherche parmis toutes les villes non visitées
+				if (distance>m_distances[villeactuelle][u]) {
+					distance = m_distances[villeactuelle][u];
+					ville=u;
+				}
+			}
+			v_visités.add(ville);
+			Integer city = ville;
+			v_avisiter.remove(city);
+			k+=1;
+			Sol.setCityPosition(ville, k);
+			villeactuelle=ville;
+		}
+
+		Sol.evaluate();
+		this.m_solution=Sol;
 		
 	}
 	
