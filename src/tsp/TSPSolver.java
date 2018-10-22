@@ -1,5 +1,7 @@
 package tsp;
 
+import java.util.ArrayList;
+
 /**
  * 
  * This class is the place where you should enter your code and from which you can create your own objects.
@@ -67,7 +69,68 @@ public class TSPSolver {
 	 * 
 	 * @throws Exception may return some error, in particular if some vertices index are wrong.
 	 */
-	public void solve() throws Exception
+	
+	public long miniDistance(long[] m, ArrayList<Integer> B, int Vactuelle) {
+		
+		long a = m[B.get(0)];
+		for (int i : B) {
+			if ((m[i] < a)&&(i!=Vactuelle)) {
+				a = m[i];
+			}
+		}
+		return a;
+	}
+	
+	public int miniVille(long[] m, ArrayList<Integer> B, int Vactuelle ) {
+		int b = 0;
+		long a = m[B.get(0)];
+		for (int i : B) {
+			if ((m[i] < a)&&(i!=Vactuelle)) {
+				a = m[i];
+				b = i;
+			}
+		}
+		return b;
+	}
+	
+	public void solve() throws Exception{
+		int n = m_instance.getNbCities();
+		Solution S = new Solution(m_instance);
+		long[][] A = m_instance.getDistances();
+		System.out.println(A);
+		long DistanceFinale =  0;
+		ArrayList<Integer> B = new ArrayList<Integer>();
+		ArrayList<Integer> M = new ArrayList<Integer>();
+		for (int i = 1; i < n; i++) {
+			B.add(i);
+		}
+		long[] ListeActive = A[0];
+		int Vactuelle = 0;
+		int k = 1;
+		S.setCityPosition(0, 0);
+		S.setCityPosition(0, n);
+		while (!B.isEmpty()) {
+			long miniD = miniDistance(ListeActive, B, Vactuelle);
+			int miniV = miniVille(ListeActive, B, Vactuelle);
+			System.out.println(miniV);
+			System.out.println(ListeActive);
+			M.add(miniV);
+			Vactuelle = miniV;
+			S.setCityPosition(miniV, k);
+			DistanceFinale = DistanceFinale + miniD;
+			Integer city = miniV;
+			B.remove(city);
+			System.out.println(B.size());
+			ListeActive = A[miniV];
+			k = k+1;
+			
+		}
+		S.setObjectiveValue(DistanceFinale);
+		
+	}
+	
+	
+	public void solve2() throws Exception
 	{
 		m_solution.print(System.err);
 		
