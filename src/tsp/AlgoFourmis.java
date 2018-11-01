@@ -3,6 +3,24 @@ package tsp;
 import java.util.ArrayList;
 
 public class AlgoFourmis {
+	private int alpha=1;
+	private int beta=5;
+	private double rho=0.5;
+	private int nb_fourmis= 1000;
+	private int nb_tours_fourmis=100;
+	private Solution m_solution;
+
+	/** The Instance of the problem. */
+	private Instance m_instance;
+
+	/** Time given to solve the problem. */
+	private long m_timeLimit;
+	
+	public AlgoFourmis(Instance instance, Solution solution, long Tlimit){
+		this.m_instance=instance;
+		this.m_solution=solution;
+		this.m_timeLimit=Tlimit;
+	}
 	
 public long miniDistance(long[] m, ArrayList<Integer> B, int Vactuelle) {
 		
@@ -61,7 +79,7 @@ public long miniDistance(long[] m, ArrayList<Integer> B, int Vactuelle) {
 	
 	//algorithme fourmis principal
 	// methode qui retourne la matrice des trajets de chaque fourmis
-	public static int[][] AlgoFourmisVoyCommerce(int nbFourmis, int nbVilles, double[][] pheromone, double[][] distance, int alpha, int beta) {
+	public static int[][] AlgoFourmisVoyCommerce(int nbFourmis, int nbVilles, double[][] pheromone, long[][] distance, int alpha, int beta) {
 		int[][] trajet = new int[nbFourmis][nbVilles+1]; //Matrice des trajets de chaque fourmis 
 		ArrayList<Integer> repartition = repartitionFourmis(nbFourmis,nbVilles);
 		int index =0; // represente le numero de fourmis
@@ -149,4 +167,25 @@ public long miniDistance(long[] m, ArrayList<Integer> B, int Vactuelle) {
 		
 		}
 
+	public void full_algo_fourmis (Instance instance, Solution solution, long tlimit) {
+		int k=nb_fourmis;
+		int n=instance.getNbCities();
+		double[][] secretion=MatricePheromone(n);
+		int [][] trajets_f= new int[k][n];
+		long[][] distance = instance.getDistances();
+		for (int t=0; t<nb_tours_fourmis;t++) {
+			AlgoFourmisVoyCommerce(this.nb_fourmis, n,secretion, distance, alpha, beta);
+			int[]distance_fourmis= new int[nb_fourmis];
+			for (int i=0;i<n;i++) {
+				for (int j=0;j<n;j++) {
+					secretion[i][j]=secretion[i][j]*(1-rho);
+				}
+			}
+			for (int i=0;i<nb_fourmis;i++) {
+				for (int j=0;j<n-1;j++) {
+					secretion[trajets_f[i][j]][trajets_f[i][j+1]]+=1/distance_fourmis[i];
+				} , 
+			}
+			for (int i=0;i<n;i++) {
+	}
 }
