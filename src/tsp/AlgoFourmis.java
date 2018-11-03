@@ -24,7 +24,7 @@ public class AlgoFourmis {
 		this.m_timeLimit=Tlimit;
 	}
 	
-public long miniDistance(long[] m, ArrayList<Integer> B, int Vactuelle) {
+public static long miniDistance(long[] m, ArrayList<Integer> B, int Vactuelle) {
 		
 		long a = m[B.get(0)];
 		for (int i : B) {
@@ -169,7 +169,7 @@ public long miniDistance(long[] m, ArrayList<Integer> B, int Vactuelle) {
 		
 		}
 
-	public void full_algo_fourmis (Instance instance, Solution solution, long tlimit) {
+	public int[] full_algo_fourmis (Instance instance, Solution solution, long tlimit) {
 		int k=nb_fourmis;
 		int n=instance.getNbCities();
 		double[][] secretion=MatricePheromone(n);
@@ -212,6 +212,7 @@ public long miniDistance(long[] m, ArrayList<Integer> B, int Vactuelle) {
 				}
 				}
 			}
+		return meilleur_trajet;
 		
 		
 		

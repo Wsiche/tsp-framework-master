@@ -148,9 +148,12 @@ public class TSPSolver {
 		this.m_solution=Sol;
 		
 	}
-	*/
-		
+	/*
+	 * 
+	 */
 	}
+		
+	
 	
 	
 	public void solve2() throws Exception
