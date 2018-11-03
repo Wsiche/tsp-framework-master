@@ -1,11 +1,11 @@
 package tsp;
 
-import java.io.File;
+
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Locale;
 import java.util.Scanner;
-
+import java.io.File;
 /**
 *
 *
