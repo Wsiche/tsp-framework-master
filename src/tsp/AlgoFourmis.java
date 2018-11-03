@@ -214,7 +214,6 @@ public long miniDistance(long[] m, ArrayList<Integer> B, int Vactuelle) {
 			}
 		
 		
-		System.out.println(meilleur_trajet);
 		
 	}
 }
