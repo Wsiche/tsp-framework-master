@@ -8,16 +8,19 @@ public class AlgoFourmis {
 	private double rho=0.5;
 	private int nb_fourmis= 1000;
 	private int nb_tours_fourmis=100;
-	private Solution m_solution;
+	public Solution m_solution;
 	private double secretion_max=5;// a changer car valeur au hasard
 	private double secretion_min=0.1;//a changer car valeur prise au hasard
 
 	/** The Instance of the problem. */
-	private Instance m_instance;
+	public Instance m_instance;
 
 	/** Time given to solve the problem. */
-	private long m_timeLimit;
+	public long m_timeLimit;
 	
+	public AlgoFourmis() {
+		super();
+	}
 	public AlgoFourmis(Instance instance, Solution solution, long Tlimit){
 		this.m_instance=instance;
 		this.m_solution=solution;
@@ -90,7 +93,7 @@ public static long miniDistance(long[] m, ArrayList<Integer> B, int Vactuelle) {
 			int nb = repartition.get(villeActuel); // nombre de fourmis pour la ville actuelle
 			for(int fourmis=0;fourmis<nb;fourmis++) {
 				trajet[index][0]=villeActuel;
-				//System.out.println(trajet[index][0]);
+				System.out.println(trajet[index][0]);
 				index++;
 			}
 			
