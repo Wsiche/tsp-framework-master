@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * @version 2017
  * 
  */
-public class TSPSolver {
+public class TSPSolver extends AlgoFourmis {
 
 	// -----------------------------
 	// ----- ATTRIBUTS -------------
@@ -147,8 +147,32 @@ public class TSPSolver {
 		Sol.evaluate();
 		this.m_solution=Sol;
 		*/
+		
+		m_solution.print(System.err);
 		Solution Sol = new Solution(m_instance);
-		int[] meilleur_trajet = AlgoFourmis.full_algo_fourmis (m_instance, Sol, m_timeLimit);
+		
+		// Example of a time loop
+		long startTime = System.currentTimeMillis();
+		long spentTime = 0;
+		int[] result = new int[m_instance.getNbCities()+1];
+		do
+		{
+			// TODO
+			// Code a loop base on time here
+			int dummyVariable = 0;
+			spentTime = System.currentTimeMillis() - startTime;
+			result = full_algo_fourmis(this.m_instance,this.m_solution,this.m_timeLimit);
+		}while(spentTime < (m_timeLimit * 1000 - 100) );
+		
+	
+		
+		
+		for(int i=0;i<result.length;i++) {
+			Sol.setCityPosition(i, result[i]);
+		}
+		Sol.evaluate();
+		this.m_solution = Sol;
+	
 		
 		
 	}
