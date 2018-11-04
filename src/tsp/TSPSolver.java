@@ -111,7 +111,7 @@ public class TSPSolver {
 		
 		
 		//algo final nearest neighbour
-		//*
+		/*
 		int n = m_instance.getNbCities();
 		Solution Sol = new Solution(m_instance);
 		long[][] m_distances = m_instance.getDistances();
@@ -146,8 +146,13 @@ public class TSPSolver {
 
 		Sol.evaluate();
 		this.m_solution=Sol;
+		*/
+		Solution Sol = new Solution(m_instance);
+		int[] meilleur_trajet = AlgoFourmis.full_algo_fourmis (m_instance, Sol, m_timeLimit);
+		
 		
 	}
+	
 	/*
 	 * 
 	 */
