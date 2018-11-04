@@ -111,14 +111,14 @@ public class TSPSolver {
 		
 		
 		//algo final nearest neighbour
-		/*
+		//*
 		int n = m_instance.getNbCities();
 		Solution Sol = new Solution(m_instance);
 		long[][] m_distances = m_instance.getDistances();
-		ArrayList<Integer> v_visités = new ArrayList<Integer>(); //villes visités
+		ArrayList<Integer> v_visites = new ArrayList<Integer>(); //villes visites
 		ArrayList<Integer> v_avisiter = new ArrayList<Integer>(); //villes a visiter
 		int villeactuelle=0;
-		v_visités.add(villeactuelle);
+		v_visites.add(villeactuelle);
 		int k=0;
 		Sol.setCityPosition(villeactuelle, k);
 		Sol.setCityPosition(villeactuelle, n);
@@ -130,13 +130,13 @@ public class TSPSolver {
 		while (v_avisiter.size()>0) {
 			int ville=v_avisiter.get(0); // recherche de la nouvelle ville a visiter
 			long distance=m_distances[villeactuelle][v_avisiter.get(0)];
-			for ( int u : v_avisiter) {//recherche parmis toutes les villes non visitées
+			for ( int u : v_avisiter) {//recherche parmis toutes les villes non visitees
 				if (distance>m_distances[villeactuelle][u]) {
 					distance = m_distances[villeactuelle][u];
 					ville=u;
 				}
 			}
-			v_visités.add(ville);
+			v_visites.add(ville);
 			Integer city = ville;
 			v_avisiter.remove(city);
 			k+=1;
@@ -151,7 +151,7 @@ public class TSPSolver {
 	/*
 	 * 
 	 */
-	}
+	
 		
 	
 	
