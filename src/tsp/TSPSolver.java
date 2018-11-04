@@ -18,8 +18,8 @@ import java.util.ArrayList;
  * @version 2017
  * 
  */
-public class TSPSolver {
-
+public class TSPSolver extends AlgoFourmis{
+	
 	// -----------------------------
 	// ----- ATTRIBUTS -------------
 	// -----------------------------
@@ -74,6 +74,9 @@ public class TSPSolver {
 	
 	
 	public void solve() throws Exception{
+		
+		int[] result = full_algo_fourmis (this.m_instance, this.m_solution, this.m_timeLimit);
+	}
 		/*
 		int n = m_instance.getNbCities();
 		Solution S = new Solution(m_instance);
@@ -151,7 +154,7 @@ public class TSPSolver {
 	/*
 	 * 
 	 */
-	}
+	
 		
 	
 	
