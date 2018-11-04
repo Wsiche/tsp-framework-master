@@ -131,8 +131,8 @@ public class TSPSolver {
 		int n = m_instance.getNbCities();
 		Solution Sol = new Solution(m_instance);
 		long[][] m_distances = m_instance.getDistances();
-		ArrayList<Integer> v_visités = new ArrayList<Integer>(); //villes visités
-		ArrayList<Integer> v_avisiter = new ArrayList<Integer>(); //villes a visiter
+		ArrayList<Integer> v_visités = new ArrayList<Integer>(); //villes visitées
+		ArrayList<Integer> v_avisiter = new ArrayList<Integer>(); //villes à visiter
 		int villeactuelle=0;
 		v_visités.add(villeactuelle);
 		int k=0;
@@ -144,9 +144,9 @@ public class TSPSolver {
 		
 		
 		while (v_avisiter.size()>0) {
-			int ville=v_avisiter.get(0); // recherche de la nouvelle ville a visiter
+			int ville=v_avisiter.get(0); // recherche de la nouvelle ville à visiter
 			long distance=m_distances[villeactuelle][v_avisiter.get(0)];
-			for ( int u : v_avisiter) {//recherche parmis toutes les villes non visitées
+			for ( int u : v_avisiter) {//recherche parmi toutes les villes non visitées
 				if (distance>m_distances[villeactuelle][u]) {
 					distance = m_distances[villeactuelle][u];
 					ville=u;
