@@ -93,7 +93,7 @@ public static long miniDistance(long[] m, ArrayList<Integer> B, int Vactuelle) {
 			int nb = repartition.get(villeActuel); // nombre de fourmis pour la ville actuelle
 			for(int fourmis=0;fourmis<nb;fourmis++) {
 				trajet[index][0]=villeActuel;
-				System.out.println(trajet[index][0]);
+				//*System.out.println(trajet[index][0]);
 				index++;
 			}
 			
