@@ -70,28 +70,8 @@ public class TSPSolver {
 	 * @throws Exception may return some error, in particular if some vertices index are wrong.
 	 */
 	
-	public long miniDistance(long[] m, ArrayList<Integer> B, int Vactuelle) {
-		
-		long a = m[B.get(0)];
-		for (int i : B) {
-			if ((m[i] < a)&&(i!=Vactuelle)) {
-				a = m[i];
-			}
-		}
-		return a;
-	}
 	
-	public int miniVille(long[] m, ArrayList<Integer> B, int Vactuelle ) {
-		int b = 0;
-		long a = m[B.get(0)];
-		for (int i : B) {
-			if ((m[i] < a)&&(i!=Vactuelle)) {
-				a = m[i];
-				b = i;
-			}
-		}
-		return b;
-	}
+	
 	
 	public void solve() throws Exception{
 		/*
@@ -128,6 +108,10 @@ public class TSPSolver {
 		}
 		S.setObjectiveValue(DistanceFinale);
 		*/
+		
+		
+		//algo final nearest neighbour
+		/*
 		int n = m_instance.getNbCities();
 		Solution Sol = new Solution(m_instance);
 		long[][] m_distances = m_instance.getDistances();
@@ -164,6 +148,12 @@ public class TSPSolver {
 		this.m_solution=Sol;
 		
 	}
+	/*
+	 * 
+	 */
+	}
+		
+	
 	
 	
 	public void solve2() throws Exception
