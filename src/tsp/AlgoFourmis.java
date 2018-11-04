@@ -7,7 +7,7 @@ public class AlgoFourmis {
 	private int beta=5;
 	private double rho=0.5;
 	private int nb_fourmis= 500;
-	private int nb_tours_fourmis=100;
+	private int nb_tours_fourmis=1;
 	private Solution m_solution;
 	private double secretion_max=5;// a changer car valeur au hasard
 	private double secretion_min=0.1;//a changer car valeur prise au hasard

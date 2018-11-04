@@ -168,8 +168,9 @@ public class TSPSolver extends AlgoFourmis {
 		
 		
 		for(int i=0;i<result.length;i++) {
-			Sol.setCityPosition(i, result[i]);
+			Sol.setCityPosition(result[i], i);
 		}
+		
 		Sol.evaluate();
 		this.m_solution = Sol;
 	
