@@ -18,8 +18,8 @@ import java.util.ArrayList;
  * @version 2017
  * 
  */
-public class TSPSolver extends AlgoFourmis{
-	
+public class TSPSolver extends AlgoFourmis {
+
 	// -----------------------------
 	// ----- ATTRIBUTS -------------
 	// -----------------------------
@@ -119,10 +119,10 @@ public class TSPSolver extends AlgoFourmis{
 		int n = m_instance.getNbCities();
 		Solution Sol = new Solution(m_instance);
 		long[][] m_distances = m_instance.getDistances();
-		ArrayList<Integer> v_visités = new ArrayList<Integer>(); //villes visitées
-		ArrayList<Integer> v_avisiter = new ArrayList<Integer>(); //villes à visiter
+		ArrayList<Integer> v_visites = new ArrayList<Integer>(); //villes visites
+		ArrayList<Integer> v_avisiter = new ArrayList<Integer>(); //villes a visiter
 		int villeactuelle=0;
-		v_visités.add(villeactuelle);
+		v_visites.add(villeactuelle);
 		int k=0;
 		Sol.setCityPosition(villeactuelle, k);
 		Sol.setCityPosition(villeactuelle, n);
@@ -134,13 +134,13 @@ public class TSPSolver extends AlgoFourmis{
 		while (v_avisiter.size()>0) {
 			int ville=v_avisiter.get(0); // recherche de la nouvelle ville à visiter
 			long distance=m_distances[villeactuelle][v_avisiter.get(0)];
-			for ( int u : v_avisiter) {//recherche parmi toutes les villes non visitées
+			for ( int u : v_avisiter) {//recherche parmis toutes les villes non visitees
 				if (distance>m_distances[villeactuelle][u]) {
 					distance = m_distances[villeactuelle][u];
 					ville=u;
 				}
 			}
-			v_visités.add(ville);
+			v_visites.add(ville);
 			Integer city = ville;
 			v_avisiter.remove(city);
 			k+=1;
@@ -150,8 +150,38 @@ public class TSPSolver extends AlgoFourmis{
 
 		Sol.evaluate();
 		this.m_solution=Sol;
+		*/
+		
+		m_solution.print(System.err);
+		Solution Sol = new Solution(m_instance);
+		
+		// Example of a time loop
+		long startTime = System.currentTimeMillis();
+		long spentTime = 0;
+		int[] result = new int[m_instance.getNbCities()+1];
+		do
+		{
+			// TODO
+			// Code a loop base on time here
+			int dummyVariable = 0;
+			spentTime = System.currentTimeMillis() - startTime;
+			result = full_algo_fourmis(this.m_instance,this.m_solution,this.m_timeLimit);
+		}while(spentTime < (m_timeLimit * 1000 - 100) );
+		
+	
+		
+		
+		for(int i=0;i<result.length;i++) {
+			Sol.setCityPosition(result[i], i);
+		}
+		
+		Sol.evaluate();
+		this.m_solution = Sol;
+	
+		
 		
 	}
+	
 	/*
 	 * 
 	 */

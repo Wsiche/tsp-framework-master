@@ -16,7 +16,7 @@ public class AlgoFourmis {
 	public Instance m_instance;
 
 	/** Time given to solve the problem. */
-	public long m_timeLimit;
+	private long m_timeLimit;
 	
 	public AlgoFourmis() {
 		super();
@@ -93,7 +93,7 @@ public static long miniDistance(long[] m, ArrayList<Integer> B, int Vactuelle) {
 			int nb = repartition.get(villeActuel); // nombre de fourmis pour la ville actuelle
 			for(int fourmis=0;fourmis<nb;fourmis++) {
 				trajet[index][0]=villeActuel;
-				//System.out.println(trajet[index][0]);
+				System.out.println(trajet[index][0]);
 				index++;
 				//System.out.println(index);
 			}
@@ -115,13 +115,14 @@ public static long miniDistance(long[] m, ArrayList<Integer> B, int Vactuelle) {
 			for(int v=0;v<nbVilles; v++) {// initialisation des villes non visites
 				villeNonVisite.add(v);
 			}
-			System.out.println("passage");
-		
+			
+			//System.out.println("passage");
+			//System.out.println(villeNonVisite);
 
 			while(villeNonVisite.size()!=0 && temp<nbVilles-1) {
 				//System.out.println(temp);
 				Integer villeActuel = trajet[fourmis][temp];
-				System.out.println(fourmis);
+				//System.out.println(fourmis);
 				villeNonVisite.remove(villeActuel);
 				double sommeProba=0;
 				ArrayList<Double> proba= new ArrayList<Double>(); //Liste de probabilite dont l'index represente la ville 
@@ -134,7 +135,7 @@ public static long miniDistance(long[] m, ArrayList<Integer> B, int Vactuelle) {
 					proba.add((Math.pow(pheromone[villeActuel][j], alpha)*Math.pow((1/(distance[villeActuel][j])), beta))/sommeProba);
 					
 				}
-				//System.out.println(villeNonVisite);
+				System.out.println(villeNonVisite);
 				boolean res = false;
 				double alea = Math.random();
 				int ville = 0;
@@ -220,5 +221,39 @@ public static long miniDistance(long[] m, ArrayList<Integer> B, int Vactuelle) {
 		
 		
 		
+	}
+	
+	public static void main(String[] args) {
+		ArrayList<Integer> l = repartitionFourmis(4,4);
+		System.out.println(l);
+		long[][] distance = new long[4][4];
+		distance[0][0]=0;
+		distance[0][1]=3;
+		distance[0][2]=7;
+		distance[0][3]=9;
+		
+		distance[1][0]=3;
+		distance[1][1]=0;
+		distance[1][2]=1;
+		distance[1][3]=4;
+		
+		distance[2][0]=7;
+		distance[2][1]=1;
+		distance[2][2]=0;
+		distance[2][3]=5;
+		
+		distance[3][0]=9;
+		distance[3][1]=4;
+		distance[3][2]=5;
+		distance[3][3]=0;
+		double[][] phero = MatricePheromone(4);
+		int[][] trajet =  AlgoFourmisVoyCommerce(5,4,phero, distance, 1, 5);
+		for(int i=0;i<trajet.length;i++) {
+			for(int j=0;j<trajet[i].length;j++) {
+				System.out.print(trajet[i][j]);
+				
+			}
+			System.out.println("");
+		}
 	}
 }
