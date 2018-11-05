@@ -10,11 +10,16 @@ public class AlgoFourmis {
 	private int beta=4;
 	/** Coefficient qui definit la vitesse d'evaporation des pheromone. */
 	private double rho=0.5;
+	/**nombre de fourmis effectuant les chemins*/
 	private int nb_fourmis= 100;
+	/** nombre de tours effectués par les fourmis*/
 	private int nb_tours_fourmis=3;
+	/** solution lue par le main*/
 	public Solution m_solution;
-	private double secretion_max=100000;// a changer car valeur au hasard
-	private double secretion_min=0.1;//a changer car valeur prise au hasard
+	//* borne superieur fixée pour la quantité de phéromones*/
+	private double secretion_max=100000;
+	//*borne inferieur fixée pour la quantité de phéromones
+	private double secretion_min=0.1;
 
 	/** The Instance of the problem. */
 	public Instance m_instance;
@@ -25,35 +30,17 @@ public class AlgoFourmis {
 	public AlgoFourmis() {
 		super();
 	}
+	/**
+	 * 
+	 * @param instance : instance du probleme
+	 * @param solution : solution a retourner
+	 * @param Tlimit : temps limite
+	 */
 	public AlgoFourmis(Instance instance, Solution solution, long Tlimit){
 		this.m_instance=instance;
 		this.m_solution=solution;
 		this.m_timeLimit=Tlimit;
-	}
-	
-public static long miniDistance(long[] m, ArrayList<Integer> B, int Vactuelle) {
-		
-		long a = m[B.get(0)];
-		for (int i : B) {
-			if ((m[i] < a)&&(i!=Vactuelle)) {
-				a = m[i];
-			}
-		}
-		return a;
-	}
-	
-	public int miniVille(long[] m, ArrayList<Integer> B, int Vactuelle ) {
-		int b = 0;
-		long a = m[B.get(0)];
-		for (int i : B) {
-			if ((m[i] < a)&&(i!=Vactuelle)) {
-				a = m[i];
-				b = i;
-			}
-		}
-		return b;
-	}
-	
+	}	
 	/**
 	 * Initialise la matrice des pheromones
 	 * @param nbVilles nombre de ville dans le probleme
@@ -71,7 +58,13 @@ public static long miniDistance(long[] m, ArrayList<Integer> B, int Vactuelle) {
 			
 		
 }
-	//methode qui retourne la liste ou l'element correpond au nombre de fourmis et l'index a la ville d'index index
+	
+	/**
+	 *  place les fourmis de facon équirepartie sur les villes, en mettant aléatoirement les fourmis restantes (reste de la divison euclidienne de nbville par nbfourmis)
+	 * @param nbFourmis nombre de fourmis
+	 * @param nbVilles nombre de villes
+	 * @return retourne la liste correpond au nombre de fourmis initial sur chacune des villes
+	 */
 	public static ArrayList<Integer> repartitionFourmis(int nbFourmis, int nbVilles) {
 		ArrayList<Integer> listeDepart = new ArrayList<Integer>();
 		int nbFourmisRestant = nbFourmis%nbVilles;
@@ -91,8 +84,17 @@ public static long miniDistance(long[] m, ArrayList<Integer> B, int Vactuelle) {
 		
 	}
 	
-	//algorithme fourmis principal
-	// methode qui retourne la matrice des trajets de chaque fourmis
+	
+	/**
+	 * methode qui calcule le trajet effectué par chaque fourmis pour effectuer chacune leur parcours de toute les villes
+	 * @param nbFourmis nombre de fourmis
+	 * @param nbVilles nombre de villes
+	 * @param pheromone tableau qui repertorie la quantité de phéromones sur le trajet entre la ville i et j a l'nedroit phéromone[i][j]
+	 * @param distance la matrice distance, copie de instance.getDistances()
+	 * @param alpha coefficient portant sur l'importance des phéromones
+	 * @param beta coefficient portant sur l'importance des trajets
+	 * @return le tableau repertoriant les trajets de fourmis 
+	 */
 	public static int[][] AlgoFourmisVoyCommerce(int nbFourmis, int nbVilles, double[][] pheromone, long[][] distance, int alpha, int beta) {
 		int[][] trajet = new int[nbFourmis][nbVilles+1]; //Matrice des trajets de chaque fourmis 
 		ArrayList<Integer> repartition = repartitionFourmis(nbFourmis,nbVilles);
@@ -104,7 +106,6 @@ public static long miniDistance(long[] m, ArrayList<Integer> B, int Vactuelle) {
 				trajet[index][0]=villeActuel;
 				System.out.println(trajet[index][0]);
 				index++;
-				//System.out.println(index);
 			}
 			
 			
@@ -124,14 +125,9 @@ public static long miniDistance(long[] m, ArrayList<Integer> B, int Vactuelle) {
 			for(int v=0;v<nbVilles; v++) {// initialisation des villes non visites
 				villeNonVisite.add(v);
 			}
-			
-			//System.out.println("passage");
-			//System.out.println(villeNonVisite);
 
 			while(villeNonVisite.size()!=0 && temp<nbVilles-1) {
-				//System.out.println(temp);
 				Integer villeActuel = trajet[fourmis][temp];
-				//System.out.println(fourmis);
 				villeNonVisite.remove(villeActuel);
 				double sommeProba=0;
 				ArrayList<Double> proba= new ArrayList<Double>(); //Liste de probabilite dont l'index represente la ville 
@@ -155,15 +151,9 @@ public static long miniDistance(long[] m, ArrayList<Integer> B, int Vactuelle) {
 					}else {
 						ville++;
 						p+=proba.get(ville);
-						
-						//System.out.println(ville);
-						
 					}
 					
 				}
-				//System.out.println(villeNonVisite);
-
-				//System.out.println(ville);
 				temp++;
 				trajet[fourmis][temp]=villeNonVisite.get(ville);
 					
@@ -182,7 +172,13 @@ public static long miniDistance(long[] m, ArrayList<Integer> B, int Vactuelle) {
 		return trajet;
 		
 		}
-
+	/**
+	 * algorithme final qui fait evoluer la matrice phéromone a travers les differents passages des fourmis pour aider les fourmis suivante a trouver un meilleur chemin et ainsi obtenir le chemin optimisé
+	 * @param instance instance du probleme
+	 * @param solution 
+	 * @param tlimit temps limite
+	 * @return
+	 */
 	public int[] full_algo_fourmis (Instance instance, Solution solution, long tlimit) {
 		int k=nb_fourmis;
 		int n=instance.getNbCities();
