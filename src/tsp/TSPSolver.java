@@ -152,7 +152,7 @@ public class TSPSolver extends AlgoFourmis {
 		this.m_solution=Sol;
 		*/
 		
-		m_solution.print(System.err);
+		/*m_solution.print(System.err);
 		Solution Sol = new Solution(m_instance);
 		
 		// Example of a time loop
