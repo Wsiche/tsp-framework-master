@@ -82,7 +82,7 @@ public class TSPSolver extends AlgoFourmis {
 		System.out.println(l);
 		//ArrayList<Integer> secondopt = p.Secondopt(l);
 		
-		for(int i=0;i<l.get(i);i++) {
+		for(int i=0;i<l.size();i++) {
 			sol.setCityPosition(l.get(i), i);
 			System.out.println(l.get(i));
 		}

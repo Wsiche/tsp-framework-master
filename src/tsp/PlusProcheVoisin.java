@@ -76,8 +76,8 @@ public class PlusProcheVoisin {
 				villeactuelle=ville;
 		}
 
-		Sol.evaluate();
-		this.m_solution=Sol;
+		//Sol.evaluate();
+		//this.m_solution=Sol;
 		SolutionListe.add(villeInitiale);
 		return SolutionListe;
 	}
