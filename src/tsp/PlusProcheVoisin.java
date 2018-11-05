@@ -57,7 +57,6 @@ public class PlusProcheVoisin {
 		SolutionListe.add(villeInitiale);
 		return SolutionListe;
 	}
-	
 	public ArrayList<Integer> Secondopt(ArrayList<Integer> SolutionListe){
 		int n = SolutionListe.size();
 		
