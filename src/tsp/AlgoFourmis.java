@@ -3,8 +3,12 @@ package tsp;
 import java.util.ArrayList;
 
 public class AlgoFourmis {
+	
+	/** Coefficient portant sur l'importance des pheromones. */
 	private int alpha=4;
+	/** Coefficient portant sur l'importance de la visibilite. */
 	private int beta=4;
+	/** Coefficient qui definit la vitesse d'evaporation des pheromone. */
 	private double rho=0.5;
 	private int nb_fourmis= 100;
 	private int nb_tours_fourmis=3;
@@ -49,7 +53,12 @@ public static long miniDistance(long[] m, ArrayList<Integer> B, int Vactuelle) {
 		}
 		return b;
 	}
-	//retourne la matrice de pheromone
+	
+	/**
+	 * Initialise la matrice des pheromones
+	 * @param nbVilles nombre de ville dans le probleme
+	 * @return La matrice de pheromone initialise a 0.5
+	 */
 	public static double[][] MatricePheromone(int nbVilles){
 		double[][] matricePheromone = new double[nbVilles][nbVilles];
 		for(int ville=0;ville<nbVilles;ville++) {
