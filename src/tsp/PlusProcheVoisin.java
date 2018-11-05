@@ -107,8 +107,8 @@ public class PlusProcheVoisin {
 			}
 		}
 		int temp = SolutionListe.get(0);
-		SolutionListe.remove(0);
-		SolutionListe.add(temp);
+		//SolutionListe.remove(0);
+		//SolutionListe.add(temp);
 		return SolutionListe;
 	}
 	

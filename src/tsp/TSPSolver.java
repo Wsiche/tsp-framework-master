@@ -33,7 +33,7 @@ public class TSPSolver extends AlgoFourmis {
 	private Instance m_instance;
 
 	/** Time given to solve the problem. */
-	private long m_timeLimit;
+	private long m_timeLimit=60;
 
 	
 	// -----------------------------
@@ -79,20 +79,43 @@ public class TSPSolver extends AlgoFourmis {
 		PlusProcheVoisin p = new PlusProcheVoisin(m_instance,m_timeLimit,sol);
 		
 		ArrayList<Integer> l = p.PlusProcheVoisinCalcul();
-		System.out.println(l);
-		//ArrayList<Integer> secondopt = p.Secondopt(l);
+		//System.out.println(l);
+		ArrayList<Integer> secondopt = p.Secondopt(l);
 		
-		for(int i=0;i<l.size();i++) {
-			sol.setCityPosition(l.get(i), i);
-			System.out.println(l.get(i));
+		
+		ArrayList<Integer> decaler = new ArrayList<>();
+		decaler.add(secondopt.get(secondopt.size()-1));
+		for(int i=0;i<secondopt.size()-1;i++) {
+			decaler.add(secondopt.get(i));
+		}
+		for(int i=0;i<secondopt.size();i++) {
+			sol.setCityPosition(decaler.get(i), i);
+			System.out.println(decaler.get(i));
 		}
 		sol.evaluate();
 		this.m_solution = sol;
-		/*/
-		/*
-		Solution Sol = new Solution(m_instance);
 		
-		int[] result = full_algo_fourmis(this.m_instance,this.m_solution,this.m_timeLimit);
+		
+		/* A decommenter pour utiliser l'algorithme fourmi
+		//Algorithme fourmi 
+		m_solution.print(System.err);
+		
+		
+		// Example of a time loop
+		long startTime = System.currentTimeMillis();
+		long spentTime = 0;
+		Solution Sol = new Solution(m_instance);
+		int[] result = new int[m_instance.getNbCities()+1];
+		do
+		{
+			// TODO
+			// Code a loop base on time here
+			result = full_algo_fourmis(this.m_instance,this.m_solution,this.m_timeLimit);
+		
+			spentTime = System.currentTimeMillis() - startTime;
+		}while(spentTime <0.006);
+		
+	
 		int n = result.length;
 		int j = 0;
 		int[] temp = new int[result.length];
@@ -125,53 +148,10 @@ public class TSPSolver extends AlgoFourmis {
 		this.m_solution = Sol;
 		*/
 		
+		
 	}
 		
 
-		/*
-
-		int n = m_instance.getNbCities();
-		Solution Sol = new Solution(m_instance);
-		ArrayList<Integer> SolutionListe = new ArrayList<Integer>();
-		long[][] m_distances = m_instance.getDistances();
-		ArrayList<Integer> v_visites = new ArrayList<Integer>(); //villes visites
-		ArrayList<Integer> v_avisiter = new ArrayList<Integer>(); //villes a visiter
-		int villeInitiale = 0;
-		int villeactuelle=0;
-		v_visites.add(villeactuelle);
-		int k=0;
-		Sol.setCityPosition(villeactuelle, k);
-		Sol.setCityPosition(villeactuelle, n);
-		SolutionListe.add(villeactuelle);
-		for (int i = 1; i < n; i++) {
-			v_avisiter.add(i);
-		}
-	
-	
-		while (v_avisiter.size()>0) {
-			int ville=v_avisiter.get(0); // recherche de la nouvelle ville à visiter
-			long distance=m_distances[villeactuelle][v_avisiter.get(0)];
-			for ( int u : v_avisiter) {//recherche parmis toutes les villes non visitees
-				if (distance>m_distances[villeactuelle][u]) {
-					distance = m_distances[villeactuelle][u];
-					ville=u;
-				}
-			}
-				v_visites.add(ville);
-				Integer city = ville;
-				v_avisiter.remove(city);
-				k+=1;
-				Sol.setCityPosition(ville, k);
-				SolutionListe.add(ville);
-				villeactuelle=ville;
-		}*/
-
-	
-	
-	/*
-	 * 
-	 */
-	
 		
 	
 	
