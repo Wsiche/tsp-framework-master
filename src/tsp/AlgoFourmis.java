@@ -7,7 +7,7 @@ public class AlgoFourmis {
 	private int beta=5;
 	private double rho=0.5;
 	private int nb_fourmis= 1000;
-	private int nb_tours_fourmis=100;
+	private int nb_tours_fourmis=10;
 	public Solution m_solution;
 	private double secretion_max=5;// a changer car valeur au hasard
 	private double secretion_min=0.1;//a changer car valeur prise au hasard
@@ -74,7 +74,7 @@ public static long miniDistance(long[] m, ArrayList<Integer> B, int Vactuelle) {
 		}
 		for(int fourmis=0;fourmis<nbFourmisRestant;fourmis++) {
 			int villes = (int)(Math.random()*nbVilles);
-			listeDepart.set(villes, listeDepart.get(villes)+fourmis);
+			listeDepart.set(villes, listeDepart.get(villes)+1);
 		}
 	
 		return listeDepart;
@@ -93,13 +93,14 @@ public static long miniDistance(long[] m, ArrayList<Integer> B, int Vactuelle) {
 			int nb = repartition.get(villeActuel); // nombre de fourmis pour la ville actuelle
 			for(int fourmis=0;fourmis<nb;fourmis++) {
 				trajet[index][0]=villeActuel;
-				//*System.out.println(trajet[index][0]);
+				//System.out.println(trajet[index][0]);
 				index++;
+				//System.out.println(index);
 			}
 			
 			
 				
-			}
+		}
 		
 		for(int fourmis=0; fourmis<nbFourmis;fourmis++) {
 			trajet[fourmis][nbVilles]=trajet[fourmis][0];
@@ -115,7 +116,7 @@ public static long miniDistance(long[] m, ArrayList<Integer> B, int Vactuelle) {
 				villeNonVisite.add(v);
 			}
 			System.out.println("passage");
-			System.out.println(villeNonVisite);
+		
 
 			while(villeNonVisite.size()!=0 && temp<nbVilles-1) {
 				//System.out.println(temp);
