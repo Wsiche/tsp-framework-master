@@ -108,6 +108,7 @@ public class TSPSolver extends AlgoFourmis{
 			ListeActive = A[miniV];
 			k = k+1;
 			
+			
 		}
 		S.setObjectiveValue(DistanceFinale);
 		*/
