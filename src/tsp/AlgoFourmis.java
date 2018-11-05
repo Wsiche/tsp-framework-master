@@ -2,6 +2,10 @@ package tsp;
 
 import java.util.ArrayList;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AlgoFourmis.
+ */
 public class AlgoFourmis {
 	
 	/** Coefficient portant sur l'importance des pheromones. */
@@ -10,14 +14,21 @@ public class AlgoFourmis {
 	private int beta=4;
 	/** Coefficient qui definit la vitesse d'evaporation des pheromone. */
 	private double rho=0.5;
-	/**nombre de fourmis effectuant les chemins*/
+	
+	/** nombre de fourmis effectuant les chemins. */
 	private int nb_fourmis= 100;
-	/** nombre de tours effectués par les fourmis*/
+	
+	/**  nombre de tours effectués par les fourmis. */
 	private int nb_tours_fourmis=3;
-	/** solution lue par le main*/
+	
+	/**  solution lue par le main. */
 	public Solution m_solution;
+	
+	/** The secretion max. */
 	//* borne superieur fixée pour la quantité de phéromones*/
 	private double secretion_max=100000;
+	
+	/** The secretion min. */
 	//*borne inferieur fixée pour la quantité de phéromones
 	private double secretion_min=0.1;
 
@@ -27,11 +38,16 @@ public class AlgoFourmis {
 	/** Time given to solve the problem. */
 	private long m_timeLimit;
 	
+	/**
+	 * Instantiates a new algo fourmis.
+	 */
 	public AlgoFourmis() {
 		super();
 	}
+	
 	/**
-	 * 
+	 * Instantiates a new algo fourmis.
+	 *
 	 * @param instance : instance du probleme
 	 * @param solution : solution a retourner
 	 * @param Tlimit : temps limite
@@ -41,8 +57,10 @@ public class AlgoFourmis {
 		this.m_solution=solution;
 		this.m_timeLimit=Tlimit;
 	}	
+	
 	/**
-	 * Initialise la matrice des pheromones
+	 * Initialise la matrice des pheromones.
+	 *
 	 * @param nbVilles nombre de ville dans le probleme
 	 * @return La matrice de pheromone initialise a 0.5
 	 */
@@ -60,10 +78,11 @@ public class AlgoFourmis {
 }
 	
 	/**
-	 *  place les fourmis de facon équirepartie sur les villes, en mettant aléatoirement les fourmis restantes (reste de la divison euclidienne de nbville par nbfourmis)
+	 *  place les fourmis de facon équirepartie sur les villes, en mettant aléatoirement les fourmis restantes (reste de la divison euclidienne de nbville par nbfourmis).
+	 *
 	 * @param nbFourmis nombre de fourmis
 	 * @param nbVilles nombre de villes
-	 * @return retourne la liste correpond au nombre de fourmis initial sur chacune des villes
+	 * @return retourne la liste correpondant au nombre de fourmis initial sur chacune des villes
 	 */
 	public static ArrayList<Integer> repartitionFourmis(int nbFourmis, int nbVilles) {
 		ArrayList<Integer> listeDepart = new ArrayList<Integer>();
@@ -86,14 +105,15 @@ public class AlgoFourmis {
 	
 	
 	/**
-	 * methode qui calcule le trajet effectué par chaque fourmis pour effectuer chacune leur parcours de toute les villes
+	 * methode qui calcule le trajet effectué par chaque fourmis pour effectuer chacune leur parcours de toute les villes.
+	 *
 	 * @param nbFourmis nombre de fourmis
 	 * @param nbVilles nombre de villes
 	 * @param pheromone tableau qui repertorie la quantité de phéromones sur le trajet entre la ville i et j a l'nedroit phéromone[i][j]
 	 * @param distance la matrice distance, copie de instance.getDistances()
 	 * @param alpha coefficient portant sur l'importance des phéromones
 	 * @param beta coefficient portant sur l'importance des trajets
-	 * @return le tableau repertoriant les trajets de fourmis 
+	 * @return le tableau repertoriant les trajets de fourmis
 	 */
 	public static int[][] AlgoFourmisVoyCommerce(int nbFourmis, int nbVilles, double[][] pheromone, long[][] distance, int alpha, int beta) {
 		int[][] trajet = new int[nbFourmis][nbVilles+1]; //Matrice des trajets de chaque fourmis 
@@ -172,12 +192,14 @@ public class AlgoFourmis {
 		return trajet;
 		
 		}
+	
 	/**
-	 * algorithme final qui fait evoluer la matrice phéromone a travers les differents passages des fourmis pour aider les fourmis suivante a trouver un meilleur chemin et ainsi obtenir le chemin optimisé
+	 * algorithme final qui fait evoluer la matrice phéromone a travers les differents passages des fourmis pour aider les fourmis suivante a trouver un meilleur chemin et ainsi obtenir le chemin optimisé.
+	 *
 	 * @param instance instance du probleme
-	 * @param solution 
+	 * @param solution the solution
 	 * @param tlimit temps limite
-	 * @return
+	 * @return the int[]
 	 */
 	public int[] full_algo_fourmis (Instance instance, Solution solution, long tlimit) {
 		int k=nb_fourmis;
@@ -230,37 +252,6 @@ public class AlgoFourmis {
 		
 	}
 	
-	public static void main(String[] args) {
-		ArrayList<Integer> l = repartitionFourmis(4,4);
-		System.out.println(l);
-		long[][] distance = new long[4][4];
-		distance[0][0]=0;
-		distance[0][1]=3;
-		distance[0][2]=7;
-		distance[0][3]=9;
-		
-		distance[1][0]=3;
-		distance[1][1]=0;
-		distance[1][2]=1;
-		distance[1][3]=4;
-		
-		distance[2][0]=7;
-		distance[2][1]=1;
-		distance[2][2]=0;
-		distance[2][3]=5;
-		
-		distance[3][0]=9;
-		distance[3][1]=4;
-		distance[3][2]=5;
-		distance[3][3]=0;
-		double[][] phero = MatricePheromone(4);
-		int[][] trajet =  AlgoFourmisVoyCommerce(5,4,phero, distance, 1, 5);
-		for(int i=0;i<trajet.length;i++) {
-			for(int j=0;j<trajet[i].length;j++) {
-				System.out.print(trajet[i][j]);
-				
-			}
-			System.out.println("");
-		}
-	}
+	
+	
 }
