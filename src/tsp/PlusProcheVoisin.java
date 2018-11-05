@@ -81,7 +81,7 @@ public class PlusProcheVoisin {
 		SolutionListe.add(villeInitiale);
 		return SolutionListe;
 	}
-<<<<<<< HEAD
+
 	
 	/**
 	 * Secondopt.
@@ -89,8 +89,7 @@ public class PlusProcheVoisin {
 	 * @param SolutionListe the solution liste
 	 * @return the array list
 	 */
-=======
->>>>>>> branch 'master' of https://github.com/Wsiche/tsp-framework-master.git
+
 	public ArrayList<Integer> Secondopt(ArrayList<Integer> SolutionListe){
 		int n = SolutionListe.size();
 		

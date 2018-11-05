@@ -204,9 +204,9 @@ public class TSPSolver extends AlgoFourmis {
 		this.m_solution = Sol;
 	
 		*/
-<<<<<<< HEAD
+
 		
-=======
+
 		int n = m_instance.getNbCities();
 		Solution Sol = new Solution(m_instance);
 		ArrayList<Integer> SolutionListe = new ArrayList<Integer>();
@@ -242,8 +242,7 @@ public class TSPSolver extends AlgoFourmis {
 				SolutionListe.add(ville);
 				villeactuelle=ville;
 		}
-		//SolutionListe=Secondopt(SolutionListe);
->>>>>>> branch 'master' of https://github.com/Wsiche/tsp-framework-master.git
+
 	}
 	
 	/*
