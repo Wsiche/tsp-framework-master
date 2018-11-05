@@ -16,10 +16,10 @@ public class AlgoFourmis {
 	private double rho=0.5;
 	
 	/** nombre de fourmis effectuant les chemins. */
-	private int nb_fourmis= 100;
+	private int nb_fourmis= 80;
 	
 	/**  nombre de tours effectués par les fourmis. */
-	private int nb_tours_fourmis=3;
+	private int nb_tours_fourmis=2;
 	
 	/**  solution lue par le main. */
 	public Solution m_solution;
