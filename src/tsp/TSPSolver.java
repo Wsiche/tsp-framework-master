@@ -154,6 +154,7 @@ public class TSPSolver extends AlgoFourmis {
 		this.m_solution=Sol;
 		*/
 		//*
+		/*
 		m_solution.print(System.err);
 		Solution Sol = new Solution(m_instance);
 		PlusProcheVoisin p = new PlusProcheVoisin(m_instance, m_timeLimit, Sol);
@@ -203,7 +204,46 @@ public class TSPSolver extends AlgoFourmis {
 		this.m_solution = Sol;
 	
 		*/
+<<<<<<< HEAD
 		
+=======
+		int n = m_instance.getNbCities();
+		Solution Sol = new Solution(m_instance);
+		ArrayList<Integer> SolutionListe = new ArrayList<Integer>();
+		long[][] m_distances = m_instance.getDistances();
+		ArrayList<Integer> v_visites = new ArrayList<Integer>(); //villes visites
+		ArrayList<Integer> v_avisiter = new ArrayList<Integer>(); //villes a visiter
+		int villeInitiale = 0;
+		int villeactuelle=0;
+		v_visites.add(villeactuelle);
+		int k=0;
+		Sol.setCityPosition(villeactuelle, k);
+		Sol.setCityPosition(villeactuelle, n);
+		SolutionListe.add(villeactuelle);
+		for (int i = 1; i < n; i++) {
+			v_avisiter.add(i);
+		}
+	
+	
+		while (v_avisiter.size()>0) {
+			int ville=v_avisiter.get(0); // recherche de la nouvelle ville à visiter
+			long distance=m_distances[villeactuelle][v_avisiter.get(0)];
+			for ( int u : v_avisiter) {//recherche parmis toutes les villes non visitees
+				if (distance>m_distances[villeactuelle][u]) {
+					distance = m_distances[villeactuelle][u];
+					ville=u;
+				}
+			}
+				v_visites.add(ville);
+				Integer city = ville;
+				v_avisiter.remove(city);
+				k+=1;
+				Sol.setCityPosition(ville, k);
+				SolutionListe.add(ville);
+				villeactuelle=ville;
+		}
+		//SolutionListe=Secondopt(SolutionListe);
+>>>>>>> branch 'master' of https://github.com/Wsiche/tsp-framework-master.git
 	}
 	
 	/*
