@@ -156,9 +156,19 @@ public class TSPSolver extends AlgoFourmis {
 		//*
 		m_solution.print(System.err);
 		Solution Sol = new Solution(m_instance);
+		PlusProcheVoisin p = new PlusProcheVoisin(m_instance, m_timeLimit, Sol);
+		ArrayList<Integer> l = p.PlusProcheVoisinCalcul();
+		ArrayList<Integer> secondopt = p.Secondopt(l);
+		for(int i=0;i<secondopt.size();i++) {
+			Sol.setCityPosition(secondopt.get(i),i);
+			System.out.println(secondopt.get(i));
+		}
+		//System.out.println(p.calculDistance(l));
+	
+		Sol.evaluate();
+		this.m_solution = Sol;
 		
-		
-		
+		/*
 		
 		int[] result = full_algo_fourmis(this.m_instance,this.m_solution,this.m_timeLimit);
 		int n = result.length;
@@ -192,7 +202,7 @@ public class TSPSolver extends AlgoFourmis {
 		Sol.evaluate();
 		this.m_solution = Sol;
 	
-	//	*/
+		*/
 		
 	}
 	

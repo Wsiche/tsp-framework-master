@@ -2,19 +2,43 @@ package tsp;
 
 import java.util.ArrayList;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PlusProcheVoisin.
+ */
 public class PlusProcheVoisin {
 
 	
+	/** The m instance. */
 	private Instance m_instance;
+	
+	/** The m time limit. */
 	private long m_timeLimit;
+	
+	/** The m solution. */
 	private Solution m_solution;
 	
+	/**
+	 * Instantiates a new plus proche voisin.
+	 *
+	 * @param m_instance the m instance
+	 * @param m_timeLimit the m time limit
+	 * @param m_solution the m solution
+	 */
 	public PlusProcheVoisin(Instance m_instance, long m_timeLimit, Solution m_solution) {
 		this.m_instance = m_instance;
 		this.m_solution = m_solution;
 		this.m_timeLimit = m_timeLimit;
 	}
 	
+	
+	/**
+	 * Calul avec la methode du plus proche voisin.
+	 *
+	 * @return Le chemin du point initial 0 a
+	 * la position finale 0, c'est a dire la liste de l'ensemble des villes parcouru
+	 * @throws Exception the exception
+	 */
 	public ArrayList<Integer> PlusProcheVoisinCalcul() throws Exception {
 		int n = m_instance.getNbCities();
 		Solution Sol = new Solution(m_instance);
@@ -58,6 +82,12 @@ public class PlusProcheVoisin {
 		return SolutionListe;
 	}
 	
+	/**
+	 * Secondopt.
+	 *
+	 * @param SolutionListe the solution liste
+	 * @return the array list
+	 */
 	public ArrayList<Integer> Secondopt(ArrayList<Integer> SolutionListe){
 		int n = SolutionListe.size();
 		
@@ -74,14 +104,23 @@ public class PlusProcheVoisin {
 				}
 			}
 		}
+		int temp = SolutionListe.get(0);
+		SolutionListe.remove(0);
+		SolutionListe.add(temp);
 		return SolutionListe;
 	}
 	
+	/**
+	 * Calcul distance.
+	 *
+	 * @param chemin the chemin
+	 * @return the long
+	 */
 	public long calculDistance (ArrayList<Integer> chemin) {
 		int n = m_instance.getNbCities();
 		long[][] distance = m_instance.getDistances();
 		long distance1=0;//calcul de la distance parcouru par la fourmis
-		for (int j=0;j<n-1;j++){
+		for (int j=0;j<n;j++){
 			distance1+=distance[chemin.get(j)][chemin.get(j+1)];
 		}
 		return distance1;
