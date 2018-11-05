@@ -3,13 +3,13 @@ package tsp;
 import java.util.ArrayList;
 
 public class AlgoFourmis {
-	private int alpha=1;
-	private int beta=5;
+	private int alpha=4;
+	private int beta=4;
 	private double rho=0.5;
-	private int nb_fourmis= 1000;
-	private int nb_tours_fourmis=10;
+	private int nb_fourmis= 100;
+	private int nb_tours_fourmis=3;
 	public Solution m_solution;
-	private double secretion_max=5;// a changer car valeur au hasard
+	private double secretion_max=100000;// a changer car valeur au hasard
 	private double secretion_min=0.1;//a changer car valeur prise au hasard
 
 	/** The Instance of the problem. */
@@ -181,7 +181,7 @@ public static long miniDistance(long[] m, ArrayList<Integer> B, int Vactuelle) {
 		int [][] trajets_f= new int[k][n+1];
 		long[][] distance = instance.getDistances();
 		int [] meilleur_trajet=new int[n+1];
-		int meilleure_distance=1000000000;
+		long meilleure_distance=1000000000;
 		for (int t=0; t<nb_tours_fourmis;t++) {
 			trajets_f=AlgoFourmisVoyCommerce(this.nb_fourmis, n,secretion, distance, alpha, beta);//actualisation du tableau représentant les trajet des fourmis
 			long[]distance_fourmis= new long[nb_fourmis];
@@ -192,7 +192,7 @@ public static long miniDistance(long[] m, ArrayList<Integer> B, int Vactuelle) {
 				}
 				distance_fourmis[i]=distance1;
 				if (distance1<meilleure_distance) {
-					distance1=meilleure_distance;
+					meilleure_distance=distance1;
 					meilleur_trajet=trajets_f[i];
 				}
 			}
@@ -201,11 +201,13 @@ public static long miniDistance(long[] m, ArrayList<Integer> B, int Vactuelle) {
 					secretion[i][j]=secretion[i][j]*(1-rho);
 				}
 			}
+			
 			for (int i=0;i<nb_fourmis;i++) {//pour chaque fourmis
 				for (int j=0;j<n-1;j++) {//pour chaque trajet effectué ( c a d passage de la ville j a j+1)
-					secretion[trajets_f[i][j]][trajets_f[i][j+1]]+=1/distance_fourmis[i];//actualisation des secretion
+					secretion[trajets_f[i][j]][trajets_f[i][j+1]]+=100000/distance_fourmis[i];//actualisation des secretion
 				}
 			}
+			
 			for (int i=0;i<n;i++) {
 				for (int j=0;j<n;j++) {// limiter la quantité de phéromones presents sur chaque trajet pour eviter de prioriser un trajet 
 					if (secretion[i][j]>=this.secretion_max) {

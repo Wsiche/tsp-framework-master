@@ -75,8 +75,10 @@ public class TSPSolver extends AlgoFourmis {
 	
 	public void solve() throws Exception{
 		
-		int[] result = full_algo_fourmis (this.m_instance, this.m_solution, this.m_timeLimit);
-	}
+		//Solution Sol = new Solution(m_instance);
+		
+		//int[] result = full_algo_fourmis (this.m_instance, this.m_solution, this.m_timeLimit);
+	
 		/*
 		int n = m_instance.getNbCities();
 		Solution S = new Solution(m_instance);
@@ -151,34 +153,28 @@ public class TSPSolver extends AlgoFourmis {
 		Sol.evaluate();
 		this.m_solution=Sol;
 		*/
-		
-		/*m_solution.print(System.err);
+		//*
+		m_solution.print(System.err);
 		Solution Sol = new Solution(m_instance);
 		
-		// Example of a time loop
-		long startTime = System.currentTimeMillis();
-		long spentTime = 0;
-		int[] result = new int[m_instance.getNbCities()+1];
-		do
-		{
-			// TODO
-			// Code a loop base on time here
-			int dummyVariable = 0;
-			spentTime = System.currentTimeMillis() - startTime;
-			result = full_algo_fourmis(this.m_instance,this.m_solution,this.m_timeLimit);
-		}while(spentTime < (m_timeLimit * 1000 - 100) );
+		
+		
+		
+		int[] result = full_algo_fourmis(this.m_instance,this.m_solution,this.m_timeLimit);
+		
 		
 	
 		
-		
+		//*/
 		for(int i=0;i<result.length;i++) {
 			Sol.setCityPosition(result[i], i);
+			System.out.println(result[i]);
 		}
 		
 		Sol.evaluate();
 		this.m_solution = Sol;
 	
-		
+	//	*/
 		
 	}
 	
